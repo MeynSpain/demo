@@ -12,12 +12,18 @@
 
 
 <div class="container mt-5">
-    <h1>Блог Сайта</h1>
-    <!--  Идем по всем элементам posts-->
-    <div th:each="element : ${posts}" class="alert alert-info mt-2">
+    <!--  Смотрим данные поста-->
+    <div th:each="element : ${post}" class="alert alert-info mt-2">
         <h3 th:text="${element.title}"></h3>
-        <p th:text="${element.anons}"></p>
-        <a th:href="'/post/'+${element.id}" class="btn btn-warning">Подробнее</a>
+        <p th:text="${element.fullText}"></p>
+        <p class="text-end">
+            <b>Просмотров: </b> <span th:text="${element.views}"/>
+        </p>
+        <a th:href="'/post/' + ${element.id} + '/edit' " class="btn btn-primary">Редактировать</a>
+        <form th:action="'/post/' + ${element.id} + '/remove'" method="post">
+            <button class="btn btn-danger" type="submit">Удалить</button>
+        </form>
+
     </div>
 </div>
 
